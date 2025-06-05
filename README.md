@@ -10,4 +10,4 @@ apt-get upgrade
 
 apt-get dist-upgrade
 
-apt-get install build-essential git chrony openssh-server python3-dev python3-pip sudo libffi-dev gcc wget ansible
+apt-get install build-essential git chrony openssh-server python3-dev python3-pip python3-full sudo libffi-dev gcc wget ansible
