@@ -17,3 +17,7 @@ cd /
 python3 -m venv myenv
 
 source /myenv/bin/activate
+
+pip install -U pip
+
+pip install kolla-ansible
