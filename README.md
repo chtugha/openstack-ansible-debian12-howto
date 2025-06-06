@@ -48,9 +48,14 @@ enable_haproxy: "no"
 
 save with ctrl + o
 
-cd myenv
+cd myenv/etc/kolla
+
+mkdir ansible
+
+cd ansible
 
 mkdir inventory
 
-cp -r /myenv/share/kolla-ansible/ansible /myenv/inventory/all-in-one
+cp -r /myenv/share/kolla-ansible/ansible /myenv/etc/kolla/ansible/inventory/all-in-one
 
+kolla-ansible bootstrap-servers
