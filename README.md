@@ -13,7 +13,7 @@ apt-get upgrade
 
 apt-get dist-upgrade
 
-apt-get install build-essential git chrony openssh-server python3-dev python3-pip python3-full sudo libffi-dev gcc wget ansible python3-openstackclient libssl-dev libdbus-glib-1-dev python3-venv
+apt-get install build-essential git chrony openssh-server python3-dev python3-pip python3-full sudo libffi-dev gcc wget ansible python3-openstackclient libssl-dev libdbus-glib-1-dev python3-venv apt-transport-https ca-certificates curl gnupg2 software-properties-common
 
 cd /
 
