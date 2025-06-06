@@ -31,7 +31,15 @@ pip install kolla-ansible
 
 cp -r /myenv/share/kolla-ansible/etc_examples/kolla /etc/kolla
 
-ip a       (remember the name of the first network interface)
+ip a       (remember the name of the first and second network interface)
 
 nano /etc/kolla/globals.yml
+
+kolla_base_distro: "debian"
+
+network_interface: "ens192" (or whatever name you remembered)
+kolla_internal_vip_address: "192.168.178.150" (or whatever the ip-address of the first interface is)
+neutron_external_interface: "ens224" (name of second interface)
+enable_haproxy: "no"
+
 
