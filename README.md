@@ -3,6 +3,7 @@
 An Instruction how to get openstack-ansible running on debian 12
 
 First install a debian minimal image (commandline only) - only add ssh when the installer asks for packets.
+You will need two network adapters at first.
 
 apt-get update
 
