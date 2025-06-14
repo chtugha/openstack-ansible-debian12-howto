@@ -45,7 +45,7 @@ echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" 
 
 apt-get update -y
 
-apt-get install postgresql-10
+apt-get install postgresql-10 python3-openstacksdk
 
 cd /tmp
 
