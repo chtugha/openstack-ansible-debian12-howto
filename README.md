@@ -81,7 +81,9 @@ run again and again till it works..
 
 nano ./roles/local_docker/tasks/compose.yml
 
-change restarted: blabla       to     state: restarted
+change        restarted: blabla       to     state: started
+
+
 
 
 
