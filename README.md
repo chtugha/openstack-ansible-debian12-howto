@@ -39,6 +39,14 @@ apt-get update -y
 
 apt-get install docker-ce
 
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+
+echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" | sudo tee  /etc/apt/sources.list.d/pgdg.list
+
+apt-get update -y
+
+apt-get install postgresql-10
+
 cd /tmp
 
 wget https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64
