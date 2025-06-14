@@ -109,6 +109,10 @@ docker exec -it awx_task /bin/bash
 
 ansible-galaxy collection install community.general
 
+ansible-galaxy collection install ansible.posix
+
+
+
 find . -name update-ca-trust
 
 cp ./var/lib/docker/overlay2/e1e7e807915be1bba963abe8fff42c1b8c935b21005b7ccafda7d477b42d03f6/diff/usr/bin/update-ca-trust ./usr/bin/update-ca-trust
