@@ -81,7 +81,17 @@ run again and again till it works..
 
 nano ./roles/local_docker/tasks/compose.yml
 
-change        restarted: blabla       to     state: started
+change        restarted: blabla       to     state: restarted
+
+cd /tmp/awx-17.1.0/installer/roles/image_build/files
+
+cp launch_awx.sh /usr/bin/launch_awx.sh
+
+cp launch_awx_task.sh /usr/bin/launch_awx_task.sh
+
+cd /root/.awx/awxcompose/
+
+docker-compose up
 
 
 
