@@ -13,7 +13,7 @@ apt-get upgrade
 
 apt-get dist-upgrade
 
-apt-get install build-essential git chrony openssh-server python3-dev python3-pip python3-full sudo libffi-dev gcc wget ansible python3-openstackclient libssl-dev libdbus-glib-1-dev python3-venv apt-transport-https ca-certificates curl gnupg2 software-properties-common
+apt-get install build-essential git chrony openssh-server python3-dev python3-pip python3-full sudo libffi-dev gcc wget python3-openstackclient libssl-dev libdbus-glib-1-dev python3-venv apt-transport-https ca-certificates curl gnupg2 software-properties-common pwgen pipx
 
 cd /
 
@@ -21,41 +21,67 @@ nano /etc/ssh/sshd_config  (change PermitRootLogin to yes)
 
 systemctl restart ssh (now you can work via ssh as root)
 
-python3 -m venv myenv
+nano /etc/apt/sources.list
 
-source /myenv/bin/activate
+add the following line:  deb http://ppa.launchpad.net/ansible/ansible/ubuntu focal main
 
-pip install -U pip
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 
-pip install kolla-ansible
+apt-get update -y
 
-cp -r /myenv/share/kolla-ansible/etc_examples/kolla /etc/kolla
+apt-get install ansible
 
-ip a       (remember the name of the first and second network interface)
+curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 
-nano /etc/kolla/globals.yml
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list
 
-kolla_base_distro: "debian"
+apt-get update -y
+
+apt-get install docker-ce
+
+cd /tmp
+
+wget https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64
+
+mv docker-compose-linux-x86_64 /usr/bin/docker-compose
+
+chmod +x /usr/bin/docker-compose
+
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+
+apt install nodejs
+
+npm install npm --global
+
+apt install docker-compose-plugin
+
+pipx ensurepath
+
+pipx install docker-compose==2.27.0
+
+wget https://github.com/ansible/awx/archive/refs/tags/17.1.0.zip
+
+unzip 17.1.0.zip
+
+cd /tmp/awx-17.1.0/installer/
+
+pwgen -N 1 -s 30
+
+copy the PW
+
+nano inventory
+
+change following lines:   admin_password=YourPassword   secret_key=TheKeyYouGenerated
+
+ansible-playbook -i inventory install.yml
+
+change the lines with the errors from docker_compose to docker.community.docker_compose_v2
+
+run again and again till it works..
+
+nano ./roles/local_docker/tasks/compose.yml
+
+change restarted: blabla       to     state: restarted
 
 
-network_interface: "ens192" (or whatever name you remembered)
 
-kolla_internal_vip_address: "192.168.178.150" (or whatever the ip-address of the first interface is)
-
-neutron_external_interface: "ens224" (name of second interface)
-
-enable_haproxy: "no"
-
-save with ctrl + o
-
-cd myenv/etc/kolla
-
-mkdir ansible
-
-cd ansible
-
-mkdir inventory
-
-cp -r /myenv/share/kolla-ansible/ansible /myenv/etc/kolla/ansible/inventory/all-in-one
-
-kolla-ansible bootstrap-servers
