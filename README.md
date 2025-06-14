@@ -83,6 +83,8 @@ nano ./roles/local_docker/tasks/compose.yml
 
 change        restarted: blabla       to     state: restarted
 
+ansible-galaxy collection install community.docker
+
 cd /tmp/awx-17.1.0/installer/roles/image_build/files
 
 cp launch_awx.sh /usr/bin/launch_awx.sh
@@ -92,6 +94,14 @@ cp launch_awx_task.sh /usr/bin/launch_awx_task.sh
 cd /root/.awx/awxcompose/
 
 docker-compose up
+
+cd /
+
+find . -name update-ca-trust
+
+cp ./var/lib/docker/overlay2/e1e7e807915be1bba963abe8fff42c1b8c935b21005b7ccafda7d477b42d03f6/diff/usr/bin/update-ca-trust ./usr/bin/update-ca-trust
+
+
 
 
 
