@@ -111,10 +111,15 @@ ansible-galaxy collection install community.general
 
 ansible-galaxy collection install ansible.posix
 
-echo "nameserver 8.8.8.8" > /etc/resolv.conf
+vi /etc/resolv.conf      nameserver 8.8.8.8 has to be added
+
+vi /etc/yum.repos.d/CentOS-Linux-ContinuousRelease.repo  change baseurl to vault.centos.bla/8.5.2111/blabla   - and all the other repos too
+
+ssh-keygen -A
 
 
 
+______________________
 
 find . -name update-ca-trust
 
