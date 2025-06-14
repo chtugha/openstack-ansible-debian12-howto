@@ -111,6 +111,9 @@ ansible-galaxy collection install community.general
 
 ansible-galaxy collection install ansible.posix
 
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
+
+
 
 
 find . -name update-ca-trust
